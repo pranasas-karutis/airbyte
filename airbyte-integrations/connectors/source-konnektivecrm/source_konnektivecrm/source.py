@@ -3,7 +3,7 @@
 #
 
 from abc import ABC, abstractmethod
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Any, Iterable, List, Mapping, MutableMapping, Optional, Tuple, Union
 from airbyte_cdk.sources.streams.core import IncrementalMixin
 
@@ -19,9 +19,11 @@ class KonnektivecrmStream(HttpStream, ABC):
 
     url_base = "https://api.konnektive.com/"
     resultsPerPage: int = 200
+    timeDaysInterval: int = 10
 
     def __init__(self, config: Mapping[str, Any], **kwargs):
         super().__init__()
+        self.config = config
         self.loginId = config["loginId"]
         self.password = config["password"]
         self.startDate = config["startDate"]
@@ -31,6 +33,34 @@ class KonnektivecrmStream(HttpStream, ABC):
             self.endDate = datetime.strftime(datetime.today(), '%m/%d/%y')
         self.page = 1
         self._cursor_value = None  # Initialize cursor value
+        self._adjust_start_date_if_needed()  # Adjust start date if necessary
+
+    # We sync in batches, adjusted by timeDaysInterval constant. If the interval is too
+    # short from the initial date, API returns error. The below logic handles it and adjusts
+    # the startDate as required.
+    def _adjust_start_date_if_needed(self):
+        while True:
+            response = self._check_date_range(self.startDate, self.endDate)
+            if response.get("result") == "SUCCESS":
+                break
+            if "matching those parameters could be found" in response.get("message", ""):
+                new_start_date_obj = datetime.strptime(self.startDate, '%m/%d/%y') + timedelta(days=self.timeDaysInterval)
+                self.startDate = new_start_date_obj.strftime('%m/%d/%y')
+                self.logger.error(f"Adjusting startDate: {self.startDate}")
+            else:
+                break  # Handle unexpected errors or stop condition
+
+    def _check_date_range(self, start_date: str, end_date: str) -> Mapping[str, Any]:
+        params = {
+            "loginId": self.loginId,
+            "password": self.password,
+            "startDate": start_date,
+            "endDate": end_date,
+            "resultsPerPage": 1,
+            "page": 1
+        }
+        response = requests.get(self.url_base + self.path(), params=params)
+        return response.json()
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
         total_results = int(response.json()["message"]["totalResults"])
@@ -40,12 +70,41 @@ class KonnektivecrmStream(HttpStream, ABC):
         if page_size * current_page < total_results:
             self.page = current_page + 1
             return self.page
-        return None
+        else:
+            # Update endDate to the next set-day interval
+            start_date_obj = datetime.strptime(self.effective_start_date, '%m/%d/%y')
+            new_start_date_obj = start_date_obj + timedelta(days=self.timeDaysInterval+1)
+            new_end_date_obj = new_start_date_obj + timedelta(days=self.timeDaysInterval+1)
+            today_date_obj = datetime.today()
+
+            # Ensure the end date does not exceed the configured endDate or today's date
+            if "endDate" in self.config:
+                user_end_date_obj = datetime.strptime(self.config["endDate"], '%m/%d/%y')
+                new_end_date_obj = min(new_end_date_obj, user_end_date_obj, today_date_obj)
+            else:
+                new_end_date_obj = min(new_end_date_obj, today_date_obj)
+
+            if new_start_date_obj > new_end_date_obj or new_start_date_obj > today_date_obj:
+                return None  # No more data to fetch
+
+            self.startDate = new_start_date_obj.strftime('%m/%d/%y')
+            self.endDate = new_end_date_obj.strftime('%m/%d/%y')
+
+            # Reset the page to 1
+            self.page = 1
+
+            return self.page
 
     def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:
         try:
             json_response = response.json()
-            for result in json_response["message"]["data"]:
+            message = json_response.get("message")
+
+            if not message or "data" not in message:
+                self.logger.error(f"Got bad response from API. Response: {response.text}")
+                return
+
+            for result in message["data"]:
                 yield result
         except ValueError:
             self.logger.error(f"Failed to parse JSON from response: {response.text}")
@@ -60,7 +119,21 @@ class KonnektivecrmStream(HttpStream, ABC):
         return date.strftime(desired_format)
 
 class IncrementalKonnektivecrmStream(KonnektivecrmStream, IncrementalMixin, ABC):
-    state_checkpoint_interval = None
+    state_checkpoint_interval = 50000
+
+    def __init__(self, config: Mapping[str, Any], **kwargs):
+        super().__init__(config, **kwargs)
+        start_date_obj = datetime.strptime(self.startDate, '%m/%d/%y')
+        new_end_date_obj = start_date_obj + timedelta(days=self.timeDaysInterval)
+        today_date_obj = datetime.today()
+
+        if "endDate" in config:
+            user_end_date_obj = datetime.strptime(config["endDate"], '%m/%d/%y')
+            self.endDate = min(new_end_date_obj, user_end_date_obj, today_date_obj).strftime('%m/%d/%y')
+        else:
+            self.endDate = min(new_end_date_obj, today_date_obj).strftime('%m/%d/%y')
+
+        self.effective_start_date = self.startDate
 
     @property
     def cursor_field(self) -> Union[str, List[str]]:
@@ -86,13 +159,15 @@ class IncrementalKonnektivecrmStream(KonnektivecrmStream, IncrementalMixin, ABC)
                 start_date = stream_state[self.cursor_field]
                 self.startDate = self._format_date(start_date, '%Y-%m-%d %H:%M:%S', '%m/%d/%y')
                 self.effective_start_date = self._format_date(start_date, '%Y-%m-%d %H:%M:%S', '%m/%d/%y')
+
+                start_date_obj = datetime.strptime(self.startDate, '%m/%d/%y')
+                new_end_date_obj = start_date_obj + timedelta(days=self.timeDaysInterval)
+                today_date_obj = datetime.today()
+                self.endDate = min(new_end_date_obj, today_date_obj).strftime('%m/%d/%y')
             else:
                 self.effective_start_date = self.startDate
         elif not stream_state:
             self.effective_start_date = self.startDate
-        else:
-            self.logger.info(f"value of page: {self.page}")
-            self.logger.info(f"value of state: {stream_state}")
 
         params = {"page": self.page, "resultsPerPage": self.resultsPerPage, "startDate": self.effective_start_date, "endDate": self.endDate,
                   "loginId": self.loginId, "password": self.password, 'dateRangeType': 'dateUpdated'}
@@ -105,15 +180,16 @@ class IncrementalKonnektivecrmStream(KonnektivecrmStream, IncrementalMixin, ABC)
         for record in records:
             yield record
             latest_record = record.get(self.cursor_field)
-            self.logger.info(f"value of latest_record: {latest_record}")
+            # self.logger.info(f"value of latest_record: {latest_record}")
             latest_record_date = datetime.strptime(latest_record, '%Y-%m-%d %H:%M:%S')
             if self._cursor_value:
                 current_state_date = datetime.strptime(self._cursor_value, '%Y-%m-%d %H:%M:%S')
                 self._cursor_value = max(current_state_date, latest_record_date).strftime('%Y-%m-%d %H:%M:%S')
             else:
                 self._cursor_value = latest_record_date.strftime('%Y-%m-%d %H:%M:%S')
-            self.logger.info(f"Trying to update state: {self._cursor_value}")
-            self.logger.info(f"Full current state is: {self.state}")
+            # self.logger.info(f"Trying to update state: {self._cursor_value}")
+            # self.logger.info(f"Full current state is: {self.state}")
+
 
 class Customers(IncrementalKonnektivecrmStream):
     primary_key = "customerId"
@@ -176,7 +252,26 @@ class Summary(IncrementalKonnektivecrmStream):
     primary_key = "date"
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
-        return None
+        # Update endDate to the next set-day interval
+        start_date_obj = datetime.strptime(self.effective_start_date, '%m/%d/%y')
+        new_start_date_obj = start_date_obj + timedelta(days=self.timeDaysInterval + 1)
+        new_end_date_obj = new_start_date_obj + timedelta(days=self.timeDaysInterval + 1)
+        today_date_obj = datetime.today()
+
+        # Ensure the end date does not exceed the configured endDate or today's date
+        if "endDate" in self.config:
+            user_end_date_obj = datetime.strptime(self.config["endDate"], '%m/%d/%y')
+            new_end_date_obj = min(new_end_date_obj, user_end_date_obj, today_date_obj)
+        else:
+            new_end_date_obj = min(new_end_date_obj, today_date_obj)
+
+        if new_start_date_obj > new_end_date_obj or new_start_date_obj > today_date_obj:
+            return None  # No more data to fetch
+
+        self.startDate = new_start_date_obj.strftime('%m/%d/%y')
+        self.endDate = new_end_date_obj.strftime('%m/%d/%y')
+
+        return 1 #return any value, for Summary does not use pagination
 
     @property
     def cursor_field(self) -> Union[str, List[str]]:
@@ -235,6 +330,7 @@ class Summary(IncrementalKonnektivecrmStream):
             self,
             response: requests.Response,
             next_page_token: Mapping[str, Any] = None,
+
             **kwargs
     ) -> Iterable[Mapping]:
         try:
@@ -266,6 +362,5 @@ class SourceKonnektivecrm(AbstractSource):
             return False, message
 
     def streams(self, config: Mapping[str, Any]) -> List[Stream]:
-
         incremental_streams = [Customers(config=config), Order(config=config), Transactions(config=config), Purchases(config=config), Summary(config=config)]
         return incremental_streams

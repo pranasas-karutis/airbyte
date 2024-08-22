@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "newSaleCnt": {
+      "type": ["null", "integer"]
+    },
+    "declinesCnt": {
+      "type": ["null", "integer"]
+    },
+    "approvedPerc": {
+      "type": ["null", "string"]
+    },
+    "newSaleRev": {
+      "type": ["null", "string"]
+    },
+    "rebillCnt": {
+      "type": ["null", "integer"]
+    },
+    "rebillDeclinesCnt": {
+      "type": ["null", "integer"]
+    },
+    "rebillApprovedPerc": {
+      "type": ["null", "string"]
+    },
+    "rebillRev": {
+      "type": ["null", "string"]
+    },
+    "salesTax": {
+      "type": ["null", "string"]
+    },
+    "surcharge": {
+      "type": ["null", "string"]
+    },
+    "refundCnt": {
+      "type": ["null", "integer"]
+    },
+    "refundRev": {
+      "type": ["null", "string"]
+    },
+    "expenses": {
+      "type": ["null", "string"]
+    },
+    "chargebackCnt": {
+      "type": ["null", "integer"]
+    },
+    "chargebackRev": {
+      "type": ["null", "string"]
+    },
+    "chargebackPerc": {
+      "type": ["null", "string"]
+    },
+    "grossRevenue": {
+      "type": ["null", "string"]
+    },
+    "netRevenue": {
+      "type": ["null", "string"]
+    },
+    "currencySymbol": {
+      "type": ["null", "string"]
+    },
+    "id": {
+      "type": ["null", "string"]
+    },
+    "refundPerc": {
+      "type": ["null", "string"]
+    },
+    "date": {
+      "type": ["null", "string"]
+    }
+  }
+}

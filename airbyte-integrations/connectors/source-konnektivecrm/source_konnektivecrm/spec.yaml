@@ -1,0 +1,33 @@
+documentationUrl: https://docs.airbyte.io/integrations/sources/monday
+connectionSpecification:
+  title: Konnektivecrm Spec
+  type: object
+  required:
+    - loginId
+    - password
+    - startDate
+  additionalProperties: false
+  properties:
+    loginId:
+      type: string
+      title: Login ID
+      description: Your Konnektive CRM API user login ID.
+    password:
+      type: string
+      title: Password
+      description: You Konnektive CRM API user password.
+      airbyte_secret: true
+    startDate:
+      type: string
+      title: Start Date
+      description: The date vfrom which you'd like to replicate data, in the format MM/DD/YY. All data generated after this date will be replicated.
+      pattern: (0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.]\d\d
+      examples:
+        - "07/01/25"
+    endDate:
+      type: string
+      title: End Date
+      description: The date to which you'd like to replicate data, in the format MM/DD/YY. All data generated before this date will be replicated.
+      pattern: (0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.]\d\d
+      examples:
+        - "07/01/25"

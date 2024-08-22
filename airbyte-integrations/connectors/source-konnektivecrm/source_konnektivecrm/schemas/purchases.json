@@ -1,0 +1,261 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": ["null", "string"]
+    },
+    "lastName": {
+      "type": ["null", "string"]
+    },
+    "emailAddress": {
+      "type": ["null", "string"]
+    },
+    "phoneNumber": {
+      "type": ["null", "string"]
+    },
+    "address1": {
+      "type": ["null", "string"]
+    },
+    "address2": {
+      "type": ["null", "string"]
+    },
+    "city": {
+      "type": ["null", "string"]
+    },
+    "state": {
+      "type": ["null", "string"]
+    },
+    "country": {
+      "type": ["null", "string"]
+    },
+    "postalCode": {
+      "type": ["null", "string"]
+    },
+    "shipFirstName": {
+      "type": ["null", "string"]
+    },
+    "shipLastName": {
+      "type": ["null", "string"]
+    },
+    "shipCity": {
+      "type": ["null", "string"]
+    },
+    "shipState": {
+      "type": ["null", "string"]
+    },
+    "shipCountry": {
+      "type": ["null", "string"]
+    },
+    "shipPostalCode": {
+      "type": ["null", "string"]
+    },
+    "purchaseId": {
+      "type": ["null", "string"]
+    },
+    "campaignId": {
+      "type": ["null", "integer"]
+    },
+    "affId": {
+      "type": ["null", "string"]
+    },
+    "productId": {
+      "type": ["null", "integer"]
+    },
+    "productSku": {
+      "type": ["null", "string"]
+    },
+    "clientProductId": {
+      "type": ["null", "string"]
+    },
+    "customerId": {
+      "type": ["null", "integer"]
+    },
+    "status": {
+      "type": ["null", "string"]
+    },
+    "cancelReason": {
+      "type": ["null", "string"]
+    },
+    "price": {
+      "type": ["null", "string"]
+    },
+    "shippingPrice": {
+      "type": ["null", "string"]
+    },
+    "lastCancellationDate": {
+      "type": ["null", "string"]
+    },
+    "lastActivationDate": {
+      "type": ["null", "string"]
+    },
+    "billingCycleType": {
+      "type": ["null", "string"]
+    },
+    "billingIntervalDays": {
+      "type": ["null", "integer"]
+    },
+    "billingCycleNumber": {
+      "type": ["null", "integer"]
+    },
+    "nextBillDate": {
+      "type": ["null", "string"]
+    },
+    "finalBillingCycle": {
+      "type": ["null", "integer"]
+    },
+    "fulfillmentCycleNumber": {
+      "type": ["null", "integer"]
+    },
+    "recycleBillingNumber": {
+      "type": ["null", "integer"]
+    },
+    "trialType": {
+      "type": ["null", "string"]
+    },
+    "trialPeriodDays": {
+      "type": ["null", "integer"]
+    },
+    "trialPrice": {
+      "type": ["null", "string"]
+    },
+    "trialShippingPrice": {
+      "type": ["null", "string"]
+    },
+    "productQty": {
+      "type": ["null", "integer"]
+    },
+    "memberId": {
+      "type": ["null", "string"]
+    },
+    "dateUpdated": {
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "dateCreated": {
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "cardLast4": {
+      "type": ["null", "string"]
+    },
+    "productName": {
+      "type": ["null", "string"]
+    },
+    "totalBilled": {
+      "type": ["null", "string"]
+    },
+    "totalRefunded": {
+      "type": ["null", "string"]
+    },
+    "orderId": {
+      "type": ["null", "string"]
+    },
+    "clubName": {
+      "type": ["null", "string"]
+    },
+    "transactions": {
+      "type": ["null", "array"],
+      "items": {
+        "type": ["null", "object"],
+        "properties": {
+          "transactionId": {
+            "type": ["null", "string"]
+          },
+          "txnDate": {
+            "type": ["null", "string"],
+            "format": "date-time"
+          },
+          "totalAmount": {
+            "type": ["null", "string"]
+          },
+          "responseType": {
+            "type": ["null", "string"]
+          },
+          "responseText": {
+            "type": ["null", "string"]
+          },
+          "merchantTxnId": {
+            "type": ["null", "string"]
+          },
+          "paySource": {
+            "type": ["null", "string"]
+          },
+          "merchantId": {
+            "type": ["null", "string"]
+          },
+          "merchant": {
+            "type": ["null", "string"]
+          },
+          "amountRefunded": {
+            "type": ["null", "string"]
+          },
+          "isChargedback": {
+            "type": ["null", "string"]
+          },
+          "chargebackDate": {
+            "type": ["null", "string"],
+            "format": "date-time"
+          },
+          "chargebackReasonCode": {
+            "type": ["null", "string"]
+          }
+        }
+      }
+    },
+    "fulfillments": {
+      "type": ["null", "array"],
+      "items": {
+        "type": ["null", "object"],
+        "properties": {
+          "fulfillmentId": {
+            "type": ["null", "integer"]
+          },
+          "fulfillmentHouseId": {
+            "type": ["null", "string"]
+          },
+          "company": {
+            "type": ["null", "string"]
+          },
+          "clientFulfillmentId": {
+            "type": ["null", "string"]
+          },
+          "trackingNumber": {
+            "type": ["null", "string"]
+          },
+          "dateShipped": {
+            "type": ["null", "string"],
+            "format": "date-time"
+          },
+          "dateDelivered": {
+            "type": ["null", "string"],
+            "format": "date-time"
+          },
+          "shipCarrier": {
+            "type": ["null", "string"]
+          },
+          "shipMethod": {
+            "type": ["null", "string"]
+          },
+          "responseText": {
+            "type": ["null", "string"]
+          },
+          "status": {
+            "type": ["null", "string"]
+          },
+          "dateReturned": {
+            "type": ["null", "string"],
+            "format": "date-time"
+          },
+          "rmaNumber": {
+            "type": ["null", "string"]
+          },
+          "dateCreated": {
+            "type": ["null", "string"],
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

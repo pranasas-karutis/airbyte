@@ -1,0 +1,357 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "description": "The unique identifier of the order.",
+      "type": ["null", "string"]
+    },
+    "actualOrderId": {
+      "description": "The actual order identifier.",
+      "type": ["null", "integer"]
+    },
+    "externalOrderId": {
+      "description": "The external order identifier.",
+      "type": ["null", "string"]
+    },
+    "clientOrderId": {
+      "description": "The client order identifier.",
+      "type": ["null", "string"]
+    },
+    "shipCarrier": {
+      "description": "The shipping carrier.",
+      "type": ["null", "string"]
+    },
+    "shipMethod": {
+      "description": "The shipping method.",
+      "type": ["null", "string"]
+    },
+    "dateCreated": {
+      "description": "The date the order was created.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "dateUpdated": {
+      "description": "The date the order was last updated.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "orderType": {
+      "description": "The type of the order.",
+      "type": ["null", "string"]
+    },
+    "orderStatus": {
+      "description": "The status of the order.",
+      "type": ["null", "string"]
+    },
+    "reviewStatus": {
+      "description": "The review status of the order.",
+      "type": ["null", "string"]
+    },
+    "totalAmount": {
+      "description": "The total amount of the order.",
+      "type": ["null", "string"]
+    },
+    "refundRemaining": {
+      "description": "The remaining refund amount.",
+      "type": ["null", "string"]
+    },
+    "avsResponse": {
+      "description": "The AVS response for the order.",
+      "type": ["null", "string"]
+    },
+    "cvvResponse": {
+      "description": "The CVV response for the order.",
+      "type": ["null", "string"]
+    },
+    "campaignName": {
+      "description": "The campaign name associated with the order.",
+      "type": ["null", "string"]
+    },
+    "customerId": {
+      "description": "The unique identifier of the customer.",
+      "type": ["null", "integer"]
+    },
+    "name": {
+      "description": "The full name of the customer.",
+      "type": ["null", "string"]
+    },
+    "emailAddress": {
+      "description": "The email address of the customer.",
+      "type": ["null", "string"]
+    },
+    "phoneNumber": {
+      "description": "The phone number of the customer.",
+      "type": ["null", "string"]
+    },
+    "firstName": {
+      "description": "The first name of the customer.",
+      "type": ["null", "string"]
+    },
+    "lastName": {
+      "description": "The last name of the customer.",
+      "type": ["null", "string"]
+    },
+    "companyName": {
+      "description": "The company name of the customer.",
+      "type": ["null", "string"]
+    },
+    "address1": {
+      "description": "The primary address of the customer.",
+      "type": ["null", "string"]
+    },
+    "address2": {
+      "description": "The secondary address of the customer.",
+      "type": ["null", "string"]
+    },
+    "city": {
+      "description": "The city of the customer.",
+      "type": ["null", "string"]
+    },
+    "state": {
+      "description": "The state of the customer.",
+      "type": ["null", "string"]
+    },
+    "country": {
+      "description": "The country of the customer.",
+      "type": ["null", "string"]
+    },
+    "postalCode": {
+      "description": "The postal code of the customer.",
+      "type": ["null", "string"]
+    },
+    "shipFirstName": {
+      "description": "The first name for shipping.",
+      "type": ["null", "string"]
+    },
+    "shipLastName": {
+      "description": "The last name for shipping.",
+      "type": ["null", "string"]
+    },
+    "shipCompanyName": {
+      "description": "The company name for shipping.",
+      "type": ["null", "string"]
+    },
+    "shipAddress1": {
+      "description": "The primary shipping address.",
+      "type": ["null", "string"]
+    },
+    "shipAddress2": {
+      "description": "The secondary shipping address.",
+      "type": ["null", "string"]
+    },
+    "shipCity": {
+      "description": "The city for shipping.",
+      "type": ["null", "string"]
+    },
+    "shipState": {
+      "description": "The state for shipping.",
+      "type": ["null", "string"]
+    },
+    "shipCountry": {
+      "description": "The country for shipping.",
+      "type": ["null", "string"]
+    },
+    "shipPostalCode": {
+      "description": "The postal code for shipping.",
+      "type": ["null", "string"]
+    },
+    "paySource": {
+      "description": "The payment source.",
+      "type": ["null", "string"]
+    },
+    "cardType": {
+      "description": "The type of card used for payment.",
+      "type": ["null", "string"]
+    },
+    "cardLast4": {
+      "description": "The last four digits of the card.",
+      "type": ["null", "string"]
+    },
+    "cardExpiryDate": {
+      "description": "The expiry date of the card.",
+      "type": ["null", "string"]
+    },
+    "cardIsPrepaid": {
+      "description": "Indicates if the card is prepaid.",
+      "type": ["null", "integer"]
+    },
+    "cardIsDebit": {
+      "description": "Indicates if the card is debit.",
+      "type": ["null", "integer"]
+    },
+    "achRoutingNumber": {
+      "description": "The ACH routing number.",
+      "type": ["null", "string"]
+    },
+    "achAccountNumber": {
+      "description": "The ACH account number.",
+      "type": ["null", "string"]
+    },
+    "couponCode": {
+      "description": "The coupon code applied to the order.",
+      "type": ["null", "string"]
+    },
+    "agentUserId": {
+      "description": "The user ID of the agent.",
+      "type": ["null", "integer"]
+    },
+    "agentName": {
+      "description": "The name of the agent.",
+      "type": ["null", "string"]
+    },
+    "price": {
+      "description": "The price of the order.",
+      "type": ["null", "string"]
+    },
+    "baseShipping": {
+      "description": "The base shipping cost.",
+      "type": ["null", "string"]
+    },
+    "voiceLogNumber": {
+      "description": "The voice log number.",
+      "type": ["null", "string"]
+    },
+    "discountPrice": {
+      "description": "The discount price applied to the order.",
+      "type": ["null", "string"]
+    },
+    "salesTax": {
+      "description": "The sales tax applied to the order.",
+      "type": ["null", "string"]
+    },
+    "surcharge": {
+      "description": "The surcharge applied to the order.",
+      "type": ["null", "string"]
+    },
+    "shipUpcharge": {
+      "description": "The shipping upcharge applied to the order.",
+      "type": ["null", "string"]
+    },
+    "shipProfileId": {
+      "description": "The shipping profile identifier.",
+      "type": ["null", "string"]
+    },
+    "isDeclineSave": {
+      "description": "Indicates if the decline is saved.",
+      "type": ["null", "integer"]
+    },
+    "ipAddress": {
+      "description": "The IP address of the customer.",
+      "type": ["null", "string"]
+    },
+    "sourceId": {
+      "description": "The source identifier.",
+      "type": ["null", "string"]
+    },
+    "sourceTitle": {
+      "description": "The source title.",
+      "type": ["null", "string"]
+    },
+    "affId": {
+      "description": "The affiliate identifier.",
+      "type": ["null", "string"]
+    },
+    "sourceValue1": {
+      "description": "Source value 1.",
+      "type": ["null", "string"]
+    },
+    "sourceValue2": {
+      "description": "Source value 2.",
+      "type": ["null", "string"]
+    },
+    "sourceValue3": {
+      "description": "Source value 3.",
+      "type": ["null", "string"]
+    },
+    "sourceValue4": {
+      "description": "Source value 4.",
+      "type": ["null", "string"]
+    },
+    "sourceValue5": {
+      "description": "Source value 5.",
+      "type": ["null", "string"]
+    },
+    "currencySymbol": {
+      "description": "The currency symbol.",
+      "type": ["null", "string"]
+    },
+    "currencyCode": {
+      "description": "The currency code.",
+      "type": ["null", "string"]
+    },
+    "campaignId": {
+      "description": "The campaign identifier.",
+      "type": ["null", "integer"]
+    },
+    "totalDiscount": {
+      "description": "The total discount applied to the order.",
+      "type": ["null", "string"]
+    },
+    "productCost": {
+      "description": "The cost of the product.",
+      "type": ["null", "string"]
+    },
+    "shippingCost": {
+      "description": "The cost of shipping.",
+      "type": ["null", "string"]
+    },
+    "custom1": {
+      "description": "Custom field 1.",
+      "type": ["null", "string"]
+    },
+    "custom2": {
+      "description": "Custom field 2.",
+      "type": ["null", "string"]
+    },
+    "custom3": {
+      "description": "Custom field 3.",
+      "type": ["null", "string"]
+    },
+    "custom4": {
+      "description": "Custom field 4.",
+      "type": ["null", "string"]
+    },
+    "custom5": {
+      "description": "Custom field 5.",
+      "type": ["null", "string"]
+    },
+    "UTMSource": {
+      "description": "The UTM source.",
+      "type": ["null", "string"]
+    },
+    "UTMMedium": {
+      "description": "The UTM medium.",
+      "type": ["null", "string"]
+    },
+    "UTMCampaign": {
+      "description": "The UTM campaign.",
+      "type": ["null", "string"]
+    },
+    "UTMTerm": {
+      "description": "The UTM term.",
+      "type": ["null", "string"]
+    },
+    "UTMContent": {
+      "description": "The UTM content.",
+      "type": ["null", "string"]
+    },
+    "hasUpsell": {
+      "description": "Indicates if the order has an upsell.",
+      "type": ["null", "boolean"]
+    },
+    "items": {
+      "description": "The items associated with the order.",
+      "type": ["null", "object"]
+    },
+    "customFields": {
+      "description": "Custom fields associated with the order.",
+      "type": ["null", "object"]
+    },
+    "fulfillments": {
+      "description": "The fulfillments associated with the order.",
+      "type": ["null", "array"]
+    }
+  },
+  "type": ["null", "object"]
+}

@@ -1,0 +1,242 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "customerId": {
+      "description": "The unique identifier of the customer.",
+      "type": ["null", "integer"]
+    },
+    "firstName": {
+      "description": "The first name of the customer.",
+      "type": ["null", "string"]
+    },
+    "lastName": {
+      "description": "The last name of the customer.",
+      "type": ["null", "string"]
+    },
+    "companyName": {
+      "description": "The company name of the customer.",
+      "type": ["null", "string"]
+    },
+    "address1": {
+      "description": "The primary address of the customer.",
+      "type": ["null", "string"]
+    },
+    "address2": {
+      "description": "The secondary address of the customer.",
+      "type": ["null", "string"]
+    },
+    "city": {
+      "description": "The city of the customer.",
+      "type": ["null", "string"]
+    },
+    "state": {
+      "description": "The state of the customer.",
+      "type": ["null", "string"]
+    },
+    "country": {
+      "description": "The country of the customer.",
+      "type": ["null", "string"]
+    },
+    "postalCode": {
+      "description": "The postal code of the customer.",
+      "type": ["null", "string"]
+    },
+    "phoneNumber": {
+      "description": "The phone number of the customer.",
+      "type": ["null", "string"]
+    },
+    "emailAddress": {
+      "description": "The email address of the customer.",
+      "type": ["null", "string"]
+    },
+    "billShipSame": {
+      "description": "Indicates if the billing and shipping addresses are the same.",
+      "type": ["null", "integer"]
+    },
+    "shipFirstName": {
+      "description": "The first name for shipping.",
+      "type": ["null", "string"]
+    },
+    "shipLastName": {
+      "description": "The last name for shipping.",
+      "type": ["null", "string"]
+    },
+    "shipCompanyName": {
+      "description": "The company name for shipping.",
+      "type": ["null", "string"]
+    },
+    "shipAddress1": {
+      "description": "The primary shipping address.",
+      "type": ["null", "string"]
+    },
+    "shipAddress2": {
+      "description": "The secondary shipping address.",
+      "type": ["null", "string"]
+    },
+    "shipCity": {
+      "description": "The city for shipping.",
+      "type": ["null", "string"]
+    },
+    "shipState": {
+      "description": "The state for shipping.",
+      "type": ["null", "string"]
+    },
+    "shipPostalCode": {
+      "description": "The postal code for shipping.",
+      "type": ["null", "string"]
+    },
+    "shipCountry": {
+      "description": "The country for shipping.",
+      "type": ["null", "string"]
+    },
+    "paySourceId": {
+      "description": "The payment source identifier.",
+      "type": ["null", "integer"]
+    },
+    "paySource": {
+      "description": "The payment source.",
+      "type": ["null", "string"]
+    },
+    "cardType": {
+      "description": "The type of card used for payment.",
+      "type": ["null", "string"]
+    },
+    "cardLast4": {
+      "description": "The last four digits of the card.",
+      "type": ["null", "string"]
+    },
+    "cardExpiryDate": {
+      "description": "The expiry date of the card.",
+      "type": ["null", "string"]
+    },
+    "sourceValue1": {
+      "description": "Source value 1.",
+      "type": ["null", "string"]
+    },
+    "sourceValue2": {
+      "description": "Source value 2.",
+      "type": ["null", "string"]
+    },
+    "sourceValue3": {
+      "description": "Source value 3.",
+      "type": ["null", "string"]
+    },
+    "sourceValue4": {
+      "description": "Source value 4.",
+      "type": ["null", "string"]
+    },
+    "sourceValue5": {
+      "description": "Source value 5.",
+      "type": ["null", "string"]
+    },
+    "dateCreated": {
+      "description": "The date the customer was created.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "dateUpdated": {
+      "description": "The date the customer was last updated.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "mostRecentActivity": {
+      "description": "The most recent activity date.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "eCommerceLogin": {
+      "description": "The eCommerce login of the customer.",
+      "type": ["null", "string"]
+    },
+    "eCommercePassword": {
+      "description": "The eCommerce password of the customer.",
+      "type": ["null", "string"]
+    },
+    "campaignName": {
+      "description": "The campaign name.",
+      "type": ["null", "string"]
+    },
+    "campaignType": {
+      "description": "The campaign type.",
+      "type": ["null", "string"]
+    },
+    "clientSourceId": {
+      "description": "The client source identifier.",
+      "type": ["null", "string"]
+    },
+    "sourceTitle": {
+      "description": "The source title.",
+      "type": ["null", "string"]
+    },
+    "sourceType": {
+      "description": "The source type.",
+      "type": ["null", "string"]
+    },
+    "sourceId": {
+      "description": "The source identifier.",
+      "type": ["null", "integer"]
+    },
+    "dob": {
+      "description": "The date of birth of the customer.",
+      "type": ["null", "string"]
+    },
+    "custom1": {
+      "description": "Custom field 1.",
+      "type": ["null", "string"]
+    },
+    "custom2": {
+      "description": "Custom field 2.",
+      "type": ["null", "string"]
+    },
+    "custom3": {
+      "description": "Custom field 3.",
+      "type": ["null", "string"]
+    },
+    "custom4": {
+      "description": "Custom field 4.",
+      "type": ["null", "string"]
+    },
+    "custom5": {
+      "description": "Custom field 5.",
+      "type": ["null", "string"]
+    },
+    "gender": {
+      "description": "The gender of the customer.",
+      "type": ["null", "string"]
+    },
+    "creditAmount": {
+      "description": "The credit amount available to the customer.",
+      "type": ["null", "number"]
+    },
+    "doNotSellName": {
+      "description": "Do not sell name flag.",
+      "type": ["null", "string"]
+    },
+    "contactOptIn": {
+      "description": "Indicates if the customer has opted in to contact.",
+      "type": ["null", "integer"]
+    },
+    "emailOptIn": {
+      "description": "Indicates if the customer has opted in to email.",
+      "type": ["null", "integer"]
+    },
+    "ipAddress": {
+      "description": "The IP address of the customer.",
+      "type": ["null", "string"]
+    },
+    "paySources": {
+      "description": "Payment sources associated with the customer.",
+      "type": ["null", "array"]
+    },
+    "notes": {
+      "description": "Notes associated with the customer.",
+      "type": ["null", "array"]
+    },
+    "customFields": {
+      "description": "Custom fields associated with the customer.",
+      "type": ["null", "object"]
+    }
+  },
+  "type": ["null", "object"]
+}
