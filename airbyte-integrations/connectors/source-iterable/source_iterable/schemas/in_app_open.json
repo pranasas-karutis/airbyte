@@ -1,0 +1,69 @@
+{
+  "properties": {
+    "deviceInfo": {
+      "description": "Information about the device used for the in-app open event.",
+      "type": ["null", "object"],
+      "properties": {
+        "deviceId": {
+          "description": "The device identifier.",
+          "type": ["null", "string"]
+        },
+        "platform": {
+          "description": "The platform of the device.",
+          "type": ["null", "string"]
+        },
+        "appPackageName": {
+          "description": "The package name of the app.",
+          "type": ["null", "string"]
+        }
+      }
+    },
+    "email": {
+      "description": "The email address of the user.",
+      "type": ["null", "string"]
+    },
+    "expiresAt": {
+      "description": "The timestamp when the message expires.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "deviceInfo.deviceId": {
+      "description": "The device identifier.",
+      "type": ["null", "string"]
+    },
+    "deviceInfo.appPackageName": {
+      "description": "The package name of the app.",
+      "type": ["null", "string"]
+    },
+    "deviceInfo.platform": {
+      "description": "The platform of the device.",
+      "type": ["null", "string"]
+    },
+    "templateId": {
+      "description": "The unique identifier of the template used in the in-app open event.",
+      "type": ["null", "integer"]
+    },
+    "messageId": {
+      "description": "The unique identifier of the message.",
+      "type": ["null", "string"]
+    },
+    "createdAt": {
+      "description": "The timestamp when the in-app open event occurred.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "itblUserId": {
+      "description": "The internal user identifier.",
+      "type": ["null", "string"]
+    },
+    "campaignId": {
+      "description": "The unique identifier of the campaign associated with the in-app open event.",
+      "type": ["null", "integer"]
+    },
+    "userId": {
+      "description": "The unique identifier of the user.",
+      "type": ["null", "string"]
+    }
+  },
+  "type": ["null", "object"]
+}

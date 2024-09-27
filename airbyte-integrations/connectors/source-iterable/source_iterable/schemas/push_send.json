@@ -1,0 +1,66 @@
+{
+  "properties": {
+    "email": {
+      "description": "The email address of the user.",
+      "type": ["null", "string"]
+    },
+    "catalogLookupCount": {
+      "description": "The count of catalog lookups associated with the push send event.",
+      "type": ["null", "integer"]
+    },
+    "templateId": {
+      "description": "The unique identifier of the template used in the push send event.",
+      "type": ["null", "integer"]
+    },
+    "messageId": {
+      "description": "The unique identifier of the message.",
+      "type": ["null", "string"]
+    },
+    "campaignId": {
+      "description": "The unique identifier of the campaign associated with the push send event.",
+      "type": ["null", "integer"]
+    },
+    "userId": {
+      "description": "The unique identifier of the user.",
+      "type": ["null", "string"]
+    },
+    "channelId": {
+      "description": "The unique identifier of the channel used.",
+      "type": ["null", "integer"]
+    },
+    "messageTypeId": {
+      "description": "The type identifier of the message.",
+      "type": ["null", "integer"]
+    },
+    "transactionalData": {
+      "description": "The transactional data associated with the push send event.",
+      "type": ["null", "string"]
+    },
+    "createdAt": {
+      "description": "The timestamp when the push send event occurred.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "platformEndpoint": {
+      "description": "The platform endpoint used for the push send event.",
+      "type": ["null", "string"]
+    },
+    "productRecommendationCount": {
+      "description": "The count of product recommendations associated with the push send event.",
+      "type": ["null", "integer"]
+    },
+    "contentId": {
+      "description": "The unique identifier of the content associated with the push send event.",
+      "type": ["null", "integer"]
+    },
+    "itblUserId": {
+      "description": "The internal user identifier.",
+      "type": ["null", "string"]
+    },
+    "catalogCollectionCount": {
+      "description": "The count of catalog collections associated with the push send event.",
+      "type": ["null", "integer"]
+    }
+  },
+  "type": ["null", "object"]
+}

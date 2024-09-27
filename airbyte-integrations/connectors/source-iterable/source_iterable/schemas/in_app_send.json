@@ -1,0 +1,93 @@
+{
+  "properties": {
+    "messageContext": {
+      "description": "Contextual information about the message.",
+      "type": ["null", "object"],
+      "properties": {
+        "saveToInbox": {
+          "description": "Indicates if the message should be saved to the inbox.",
+          "type": ["null", "boolean"]
+        },
+        "silentInbox": {
+          "description": "Indicates if the message should be sent silently to the inbox.",
+          "type": ["null", "boolean"]
+        }
+      }
+    },
+    "messageContext.silentInbox": {
+      "description": "Indicates if the message should be sent silently to the inbox.",
+      "type": ["null", "boolean"]
+    },
+    "email": {
+      "description": "The email address of the user.",
+      "type": ["null", "string"]
+    },
+    "expiresAt": {
+      "description": "The timestamp when the message expires.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "catalogLookupCount": {
+      "description": "The count of catalog lookups associated with the in-app send event.",
+      "type": ["null", "integer"]
+    },
+    "messageContext.saveToInbox": {
+      "description": "Indicates if the message should be saved to the inbox.",
+      "type": ["null", "boolean"]
+    },
+    "templateId": {
+      "description": "The unique identifier of the template used in the in-app send event.",
+      "type": ["null", "integer"]
+    },
+    "messageId": {
+      "description": "The unique identifier of the message.",
+      "type": ["null", "string"]
+    },
+    "createdAt": {
+      "description": "The timestamp when the in-app send event occurred.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "campaignId": {
+      "description": "The unique identifier of the campaign associated with the in-app send event.",
+      "type": ["null", "integer"]
+    },
+    "userId": {
+      "description": "The unique identifier of the user.",
+      "type": ["null", "string"]
+    },
+    "channelId": {
+      "description": "The unique identifier of the channel used.",
+      "type": ["null", "integer"]
+    },
+    "priorityLevel": {
+      "description": "The priority level of the message.",
+      "type": ["null", "number"]
+    },
+    "messageTypeId": {
+      "description": "The type identifier of the message.",
+      "type": ["null", "integer"]
+    },
+    "transactionalData": {
+      "description": "The transactional data associated with the in-app send event.",
+      "type": ["null", "string"]
+    },
+    "productRecommendationCount": {
+      "description": "The count of product recommendations associated with the in-app send event.",
+      "type": ["null", "integer"]
+    },
+    "contentId": {
+      "description": "The unique identifier of the content associated with the in-app send event.",
+      "type": ["null", "integer"]
+    },
+    "itblUserId": {
+      "description": "The internal user identifier.",
+      "type": ["null", "string"]
+    },
+    "catalogCollectionCount": {
+      "description": "The count of catalog collections associated with the in-app send event.",
+      "type": ["null", "integer"]
+    }
+  },
+  "type": ["null", "object"]
+}

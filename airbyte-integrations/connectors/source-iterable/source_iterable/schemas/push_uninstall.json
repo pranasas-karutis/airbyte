@@ -1,0 +1,42 @@
+{
+  "properties": {
+    "email": {
+      "description": "The email address of the user.",
+      "type": ["null", "string"]
+    },
+    "templateId": {
+      "description": "The unique identifier of the template used in the push uninstall event.",
+      "type": ["null", "integer"]
+    },
+    "messageId": {
+      "description": "The unique identifier of the message.",
+      "type": ["null", "string"]
+    },
+    "itblUserId": {
+      "description": "The internal user identifier.",
+      "type": ["null", "string"]
+    },
+    "userId": {
+      "description": "The unique identifier of the user.",
+      "type": ["null", "string"]
+    },
+    "createdAt": {
+      "description": "The timestamp when the push uninstall event occurred.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "platformEndpoint": {
+      "description": "The platform endpoint used for the push uninstall event.",
+      "type": ["null", "string"]
+    },
+    "isGhostPush": {
+      "description": "Indicates if the push uninstall event was a ghost push.",
+      "type": ["null", "boolean"]
+    },
+    "campaignId": {
+      "description": "The unique identifier of the campaign associated with the push uninstall event.",
+      "type": ["null", "integer"]
+    }
+  },
+  "type": ["null", "object"]
+}

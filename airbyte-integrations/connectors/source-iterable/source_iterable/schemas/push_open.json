@@ -1,0 +1,43 @@
+{
+  "properties": {
+    "email": {
+      "description": "The email address of the user.",
+      "type": ["null", "string"]
+    },
+    "templateId": {
+      "description": "The unique identifier of the template used in the push open event.",
+      "type": ["null", "integer"]
+    },
+    "createdAt": {
+      "description": "The timestamp when the push open event occurred.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "itblUserId": {
+      "description": "The internal user identifier.",
+      "type": ["null", "string"]
+    },
+    "userId": {
+      "description": "The unique identifier of the user.",
+      "type": ["null", "string"]
+    },
+    "actionIdentifier": {
+      "description": "The identifier of the action taken by the user.",
+      "type": ["null", "string"]
+    },
+    "messageId": {
+      "description": "The unique identifier of the message.",
+      "type": ["null", "string"]
+    },
+    "sentAt": {
+      "description": "The timestamp when the push notification was sent.",
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "campaignId": {
+      "description": "The unique identifier of the campaign associated with the push open event.",
+      "type": ["null", "integer"]
+    }
+  },
+  "type": ["null", "object"]
+}

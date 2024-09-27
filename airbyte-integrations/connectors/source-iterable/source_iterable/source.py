@@ -10,7 +10,7 @@ from airbyte_cdk.sources.streams.http.requests_native_auth import TokenAuthentic
 
 from .streams import (
     CampaignsMetrics,
-    CustomEvent,
+    CustomEventIproyal,
     EmailBounce,
     EmailClick,
     EmailComplaint,
@@ -104,7 +104,7 @@ class SourceIterable(YamlDeclarativeSource):
                 SmsSendSkip(authenticator=authenticator, **date_range),
                 SmsUsageInfo(authenticator=authenticator, **date_range),
                 Purchase(authenticator=authenticator, **date_range),
-                CustomEvent(authenticator=authenticator, **date_range),
+                CustomEventIproyal(authenticator=authenticator, **date_range),
                 HostedUnsubscribeClick(authenticator=authenticator, **date_range),
             ]
         )

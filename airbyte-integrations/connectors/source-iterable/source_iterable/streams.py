@@ -6,7 +6,7 @@ import csv
 import json
 from abc import ABC, abstractmethod
 from io import StringIO
-from typing import Any, Dict, Iterable, List, Mapping, MutableMapping, Optional, Union
+from typing import Any, Dict, Iterable, List, Mapping, MutableMapping, Optional, Union, Tuple
 
 import pendulum
 import requests
@@ -17,7 +17,7 @@ from airbyte_cdk.sources.streams.http import HttpStream
 from airbyte_cdk.sources.streams.http.exceptions import DefaultBackoffException, UserDefinedBackoffException
 from airbyte_cdk.sources.utils.schema_helpers import ResourceSchemaLoader
 from pendulum.datetime import DateTime
-from requests import HTTPError
+from requests import HTTPError, codes
 from requests.exceptions import ChunkedEncodingError
 from source_iterable.slice_generators import AdjustableSliceGenerator, RangeSliceGenerator, StreamSlice
 from source_iterable.utils import dateutil_parse
@@ -106,7 +106,7 @@ class IterableStream(HttpStream, ABC):
             if self._slice_retry < 3:
                 return True
             return False
-        return response.status_code == 429 or 500 <= response.status_code < 600
+        return super().should_retry(response)
 
     def read_records(
         self,
@@ -272,7 +272,6 @@ class IterableExportStreamRanged(IterableExportStream, ABC):
         start_datetime = self.get_start_date(stream_state)
 
         return RangeSliceGenerator(start_datetime, self._end_date)
-
 
 class IterableExportStreamAdjustableRange(IterableExportStream, ABC):
     """
@@ -465,7 +464,7 @@ class EmailUnsubscribe(IterableExportStreamAdjustableRange):
     data_field = "emailUnsubscribe"
 
 
-class PushSend(IterableExportEventsStreamAdjustableRange):
+class PushSend(IterableExportStreamAdjustableRange):
     data_field = "pushSend"
 
 
@@ -473,11 +472,11 @@ class PushSendSkip(IterableExportEventsStreamAdjustableRange):
     data_field = "pushSendSkip"
 
 
-class PushOpen(IterableExportEventsStreamAdjustableRange):
+class PushOpen(IterableExportStreamAdjustableRange):
     data_field = "pushOpen"
 
 
-class PushUninstall(IterableExportEventsStreamAdjustableRange):
+class PushUninstall(IterableExportStreamAdjustableRange):
     data_field = "pushUninstall"
 
 
@@ -497,19 +496,19 @@ class WebPushSendSkip(IterableExportEventsStreamAdjustableRange):
     data_field = "webPushSendSkip"
 
 
-class InAppSend(IterableExportEventsStreamAdjustableRange):
+class InAppSend(IterableExportStreamAdjustableRange):
     data_field = "inAppSend"
 
 
-class InAppOpen(IterableExportEventsStreamAdjustableRange):
+class InAppOpen(IterableExportStreamAdjustableRange):
     data_field = "inAppOpen"
 
 
-class InAppClick(IterableExportEventsStreamAdjustableRange):
+class InAppClick(IterableExportStreamAdjustableRange):
     data_field = "inAppClick"
 
 
-class InAppClose(IterableExportEventsStreamAdjustableRange):
+class InAppClose(IterableExportStreamAdjustableRange):
     data_field = "inAppClose"
 
 
@@ -517,7 +516,7 @@ class InAppDelete(IterableExportEventsStreamAdjustableRange):
     data_field = "inAppDelete"
 
 
-class InAppDelivery(IterableExportEventsStreamAdjustableRange):
+class InAppDelivery(IterableExportStreamAdjustableRange):
     data_field = "inAppDelivery"
 
 
@@ -561,8 +560,35 @@ class Purchase(IterableExportEventsStreamAdjustableRange):
     data_field = "purchase"
 
 
-class CustomEvent(IterableExportEventsStreamAdjustableRange):
+class CustomEventIproyal(IterableExportStreamAdjustableRange):
     data_field = "customEvent"
+
+    def request_params(
+        self,
+        stream_state: Mapping[str, Any],
+        stream_slice: StreamSlice,
+        next_page_token: Mapping[str, Any] = None,
+    ) -> Union[MutableMapping[str, Any], List[Tuple[str, str]]]:
+
+        # Get the default parameters from the superclass
+        params = super().request_params(
+            stream_state=stream_state,
+            stream_slice=stream_slice,
+            next_page_token=next_page_token
+        )
+
+        # Convert the params dictionary to a list of tuples
+        params_list = list(params.items())
+
+        # Add multiple 'onlyFields' parameters
+        params_list.extend([
+            ("onlyFields", "createdAt"),
+            ("onlyFields", "eventName"),
+            ("onlyFields", "campaignId"),
+            ("onlyFields", "email"),
+        ])
+
+        return params_list
 
 
 class HostedUnsubscribeClick(IterableExportEventsStreamAdjustableRange):
